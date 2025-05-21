@@ -2,6 +2,7 @@
 # v1.0.0
 
 get-audiodevice - Lists the connected, enabled, audio output devices on the system.
+
 set-defaultaudiodevice - Sets the default audio output device.
        Example: Set-DefaultAudioDevice "Speakers (Realtek High Definition Audio)"
        Substring matches are supported, e.g. Set-DefaultAudioDevice "polycom" 
