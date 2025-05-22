@@ -1,16 +1,36 @@
-# AudioDeviceManager
+# AudioDeviceManager 
 
-v1.0.0
+This is a collection of command-line utilities for managing Audio Devices in Windows, to automate the functions provided by the Sound Control panel, mmsys.cpl..  They can list devices, set the default devices, and enable/disable devices.
 
-get-audiodevice - Lists the connected, enabled, audio output devices on the system.
+Replace this:
 
-set-defaultaudiodevice - Sets the default audio output device.
-       Example: Set-DefaultAudioDevice "Speakers (Realtek High Definition Audio)"
-       Substring matches are supported, e.g. Set-DefaultAudioDevice "polycom" 
+![MMsys.Cpl Screenshot](doc/mmsyscpl.png)
 
-## Screenshot
+With this:
 
 ![Screenshot](doc/screenshot.png)
+
+## Utilities
+```
+Get-AudioDevice.exe
+  -h: Display Help Message
+  -input or -output displays input or output devices respectively.
+  -disabled or -enabled displays disabled or enabled devices respectively.
+  Running the executable with no options will display enabled output devices.
+
+set-defaultaudiodevice - Sets the default audio output device.
+  Example: Set-DefaultAudioDevice "Speakers (Realtek High Definition Audio)"
+  Substring matches are supported, e.g. Set-DefaultAudioDevice "polycom" 
+
+enable-audiodevice - Enables the specified audio device.
+  Example: Enable-AudioDevice "Speakers (Realtek High Definition Audio)"
+  Substring matches are supported, e.g. Enable-AudioDevice "polycom"
+
+
+disable-audiodevice - Disables the specified audio device.
+  Example: Disable-AudioDevice "Speakers (Realtek High Definition Audio)"
+  Substring matches are supported, e.g. Disable-AudioDevice "polycom"
+```
 
 ## Disclaimer
 
