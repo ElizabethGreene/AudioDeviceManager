@@ -9,9 +9,9 @@ int wmain(int argc, wchar_t* argv[])
 	// If no command line arguments are provided, display a help message
 	if (argc < 2)
 	{
-		std::cout << "Usage: Enable-AudioDevice <device_name>" << std::endl;
-		std::cout << "Example: Enable-AudioDevice \"Speakers (Realtek High Definition Audio)\"" << std::endl;
-		std::cout << "Substring matches are supported, e.g. Enable-AudioDevice \"polycom\" will enable the first device containing polycom in the name.";
+		std::cout << "Enable-AudioDevice <device_name>" << std::endl;
+		std::cout << "  Example: Enable-AudioDevice \"Speakers (Realtek High Definition Audio)\"" << std::endl;
+		std::cout << "  Substring matches are supported, e.g. Enable-AudioDevice \"polycom\" will enable the first device containing polycom in the name.";
 		return 1;
 	}
 

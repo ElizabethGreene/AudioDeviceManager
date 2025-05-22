@@ -17,9 +17,9 @@ int wmain(int argc, wchar_t* argv[]) // Add parameters to main function
    // If no audio device is specified, display a help message
    if (argc < 2)
    {
-       std::cout << "Usage: Set-DefaultAudioDevice <device_name>" << std::endl;
-       std::cout << "Example: Set-DefaultAudioDevice \"Speakers (Realtek High Definition Audio)\"" << std::endl;
-       std::cout << "Substring matches are supported, e.g. Set-DefaultAudioDevice \"polycom\" will set the default to the first device containing polycom in the name.";
+       std::cout << "Set-DefaultAudioDevice <device_name>" << std::endl;
+       std::cout << "  Example: Set-DefaultAudioDevice \"Speakers (Realtek High Definition Audio)\"" << std::endl;
+       std::cout << "  Substring matches are supported, e.g. Set-DefaultAudioDevice \"polycom\" will set the default to the first device containing polycom in the name.";
        return 1;
    }
 
