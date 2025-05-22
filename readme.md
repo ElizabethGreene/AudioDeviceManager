@@ -1,12 +1,21 @@
 # AudioDeviceManager
 
-v1.0.0
+v1.1.0
 
 get-audiodevice - Lists the connected, enabled, audio output devices on the system.
 
 set-defaultaudiodevice - Sets the default audio output device.
        Example: Set-DefaultAudioDevice "Speakers (Realtek High Definition Audio)"
        Substring matches are supported, e.g. Set-DefaultAudioDevice "polycom" 
+
+enable-audiodevice - Enables the specified audio device.
+       Example: Enable-AudioDevice "Speakers (Realtek High Definition Audio)"
+       Substring matches are supported, e.g. Enable-AudioDevice "polycom"
+
+
+disable-audiodevice - Disables the specified audio device.
+       Example: Disable-AudioDevice "Speakers (Realtek High Definition Audio)"
+       Substring matches are supported, e.g. Disable-AudioDevice "polycom"
 
 ## Screenshot
 

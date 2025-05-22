@@ -92,8 +92,7 @@ public:
     );
 
     virtual HRESULT STDMETHODCALLTYPE SetEndpointVisibility(
-        PCWSTR,
-        INT
+        PCWSTR pszDeviceName, bool bVisible
     );
 };
 
@@ -175,7 +174,6 @@ public:
     );
 
     virtual HRESULT STDMETHODCALLTYPE SetEndpointVisibility(
-        PCWSTR,
-        INT
+        PCWSTR pszDeviceName, bool bVisible
     );  // not available on Windows 7, use method from IPolicyConfig
 };

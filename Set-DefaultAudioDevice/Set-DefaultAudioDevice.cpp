@@ -12,18 +12,6 @@
 
 
 
-size_t findCaseInsensitive(std::wstring str, std::wstring substr) {
-	// I've written this function 5,000 times. For god's green gravy goats, why isn't it in the standard library?
-	auto it = std::search(
-		str.begin(), str.end(),
-		substr.begin(), substr.end(),
-		[](char c1, char c2) {
-			return std::tolower(c1) == std::tolower(c2);
-		}
-	);
-	return (it == str.end()) ? std::wstring::npos : (it - str.begin());
-}
-
 int wmain(int argc, wchar_t* argv[]) // Add parameters to main function
 {
    // If no audio device is specified, display a help message
@@ -38,35 +26,28 @@ int wmain(int argc, wchar_t* argv[]) // Add parameters to main function
    // Get the name of the audio device from the command line arguments
    std::wstring targetDeviceName = argv[1];
 
-   std::vector <std::wstring> deviceNames;
-
-   HRESULT hr = getDeviceNames(&deviceNames);
-
-   if (FAILED(hr))
+   // Get the Device ID based on the device name
+   targetDeviceName = getDeviceNameFromPartialName(targetDeviceName, DeviceStatuses::Enabled, DeviceTypes::Output);
+   if (targetDeviceName.empty())
    {
-	   std::cerr << "Failed to get device names: " << std::hex << hr << std::endl;
+	   std::wcerr << L"Failed to find a matching device." << std::endl;
+	   return -1;
+   }
+   LPCWSTR deviceId = getDeviceIdFromName(targetDeviceName,DeviceStatuses::Enabled,DeviceTypes::Output);
+   if (deviceId == NULL)
+   {
+	   std::wcerr << L"Failed to find a matching device: " << targetDeviceName << std::endl;
 	   return -1;
    }
 
-   // Loop through the device names to match the device name.
-
-   for (const auto& deviceName : deviceNames)
+   // Set the default audio device using the device ID
+   HRESULT hr = SetDefaultAudioPlaybackDevice(deviceId);
+   if (FAILED(hr))
    {
-	   if (findCaseInsensitive(deviceName, targetDeviceName) != std::wstring::npos) {
-
-		   HRESULT hr = SetDefaultAudioDeviceByName(deviceName);
-		   if (FAILED(hr))
-		   {
-			   std::cerr << "Failed to set default audio device: " << std::hex << hr << std::endl;
-			   return 1;
-		   }
-		   std::wcout << L"Default audio device set to: " << deviceName << std::endl;
-		   return 0;
-	   }
+	   std::cerr << "Failed to set default audio output device: " << std::hex << hr << std::endl;
+	   return -1;
    }
-
-   std::cerr << "No match for device name" << std::endl;
-   return -1;
+   std::wcout << L"Default audio output device set to: " << targetDeviceName << std::endl;
 }
 
 
