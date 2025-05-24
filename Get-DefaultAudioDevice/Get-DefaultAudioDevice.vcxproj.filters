@@ -15,19 +15,13 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Get-AudioDevice.cpp">
+    <ClCompile Include="Get-DefaultAudioDevice.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="AudioDeviceManger.h">
-      <Filter>Resource Files</Filter>
-    </ClInclude>
-    <ClInclude Include="PolicyConfig.h">
+    <ClInclude Include="..\Get-AudioDevice\AudioDeviceManger.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="TestCase.ps1" />
   </ItemGroup>
 </Project>

@@ -21,8 +21,8 @@
   <PropertyGroup Label="Globals">
     <VCProjectVersion>17.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
-    <ProjectGuid>{f3acbada-64d6-41c5-82ff-90b54f95ced9}</ProjectGuid>
-    <RootNamespace>SetDefaultAudioDevice</RootNamespace>
+    <ProjectGuid>{0ff3cdb3-1053-40d0-aea7-f8a3479f1f41}</ProjectGuid>
+    <RootNamespace>GetDefaultAudioDevice</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -129,14 +129,10 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Set-DefaultAudioDevice.cpp" />
+    <ClCompile Include="Get-DefaultAudioDevice.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\Get-AudioDevice\AudioDeviceManger.h" />
-    <ClInclude Include="..\Get-AudioDevice\PolicyConfig.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="TestCase.ps1" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

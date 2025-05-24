@@ -135,6 +135,9 @@
     <ClInclude Include="AudioDeviceManger.h" />
     <ClInclude Include="PolicyConfig.h" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="TestCase.ps1" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

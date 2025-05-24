@@ -13,11 +13,6 @@
 #include "AudioDeviceManger.h"
 
 
-enum class Actions {
-	SHOWDATA,
-	SHOWHELP
-};
-
 void PrintHelp() {
 	std::wcout << L"Get-AudioDevice.exe" << std::endl;
 	std::wcout << L"  -h: Display Help Message" << std::endl;
@@ -38,27 +33,6 @@ DeviceStatuses DeviceStatusFromCommandLine(int argc, wchar_t* argv[]) {
 	return DeviceStatuses::Enabled;
 };
 
-Actions ActionFromCommandLine(int argc, wchar_t* argv[]) {
-	if (argc > 1) {
-		for (int i = 1; i < argc; ++i) {
-			if (_wcsicmp(argv[i], L"-h") == 0) {
-				return Actions::SHOWHELP;
-			}
-		}
-	}
-	return Actions::SHOWDATA;
-};
-
-DeviceTypes DeviceTypeFromCommandLine(int argc, wchar_t* argv[]) {
-	if (argc > 1) {
-		for (int i = 1; i < argc; ++i) {
-			if (_wcsicmp(argv[i], L"-input") == 0) {
-				return DeviceTypes::Input;
-			}
-		}
-	}
-	return DeviceTypes::Output;
-};
 
 int wmain(int argc, wchar_t* argv[])
 {
