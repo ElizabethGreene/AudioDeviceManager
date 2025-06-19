@@ -1,11 +1,10 @@
-
 $exePath = ".\Set-DefaultAudioDevice.exe"
 $baseDir = "C:\github\AudioDeviceManager\x64\Debug"
 $passed = 0
 $total = 0
 
-# Change to the directory containing the executable
-Set-Location -Path $baseDir
+$exePath = Join-Path -Path $baseDir -ChildPath $exePath
+
 
 # Helper function to run a test
 function Run-Test {
@@ -17,17 +16,24 @@ function Run-Test {
     Write-Host "Running test: $TestName"
 
     # Run the command and capture output
-    $output = & $exePath @Arguments | Out-String -Stream | ForEach-Object { $_.Trim() } | Where-Object { $_ }
+    $output = & $exePath @Arguments | Out-String -Stream # | ForEach-Object { $_.Trim() } | Where-Object { $_ }
     
     # Compare output with expected
     $match = $true
     if ($output.Count -ne $ExpectedOutput.Count) {
         $match = $false
     } else {
-        for ($i = 0; $i -lt $output.Count; $i++) {
-            if ($output[$i] -ne $ExpectedOutput[$i]) {
+        #Special Handling here for commands with a single line of expected output vs. multi-line output
+        if ($ExpectedOutput.Count -eq 1) {
+            if ($output -ne $ExpectedOutput[0]) {
                 $match = $false
-                break
+            }
+        } else {
+            for ($i = 0; $i -lt $output.Count; $i++) {
+                if ($output[$i] -ne $ExpectedOutput[$i]) {
+                    $match = $false
+                    break
+                }
             }
         }
     }
@@ -37,9 +43,10 @@ function Run-Test {
         Write-Host "PASS: $TestName" -ForegroundColor Green
         return $true
     } else {
+        $seperator = """`n"""
         Write-Host "FAIL: $TestName" -ForegroundColor Red
-        Write-Host "Expected: ---$($ExpectedOutput -join ', ')---"
-        Write-Host "Got: ---$($output -join ', ')---"
+        Write-Host "Expected:`n""$($ExpectedOutput -join $seperator)"""
+        Write-Host "Got:`n""$($output -join $seperator )"""
         return $false
     }
 }
@@ -50,44 +57,46 @@ $tests = @(
         Name = "Default (no options)"
         Args = @()
         Expected = @(
-"No device name found"
-" Set-DefaultAudioDevice [-h] [-input|-output] [-sound|-communications] <device_name>"
-"  Sets the Default sound or communications device."
-""
-" Syntax:"
-"  -h (or with no options) : Displays this help"
-"  -sounds | -communications : Select the ""role"" to set"
-"    -sounds : Games, system notifications, Music, movies, narration, and live music recording."
-"    -communications : Voice communications (talking to another person)."
-"  -Input | -Output"
-"    Sets the Input or Output device respectively."
-"  <device name> : The name of the audio device to set as default."
-"    Substring matches are supported, e.g. ""polycom"" will match to the first device with polycom in the name."
-""
-"  Running the executable with just a device name sets the default sound output device."
-"    Example: Set-DefaultAudioDevice ""Realtek"""
-        )
+" Set-DefaultAudioDevice [-h] [-input|-output] [-sound|-communications] <device_name>",
+"  Sets the Default sound or communications device.",
+"",
+" Syntax:",
+"  -h (or with no options) : Displays this help",
+"  -sounds | -communications : Select the ""role"" to set",
+"    -sounds : Games, system notifications, Music, movies, narration, and live music recording.",
+"    -communications : Voice communications (talking to another person).",
+"  -Input | -Output",
+"    Sets the Input or Output device respectively.",
+"  <device name> : The name of the audio device to set as default.",
+"    Substring matches are supported, e.g. ""polycom"" will match to the first device with polycom in the name.",
+"",
+"  Running the executable with just a device name sets the default sound output device.",
+"    Example: Set-DefaultAudioDevice ""Realtek""",
+"",
+""        )
     },
     @{
         Name = "Help Option (-h)"
         Args = @("-h")
         Expected = @(
-"No device name found"
-" Set-DefaultAudioDevice [-h] [-input|-output] [-sound|-communications] <device_name>"
-"  Sets the Default sound or communications device."
-""
-" Syntax:"
-"  -h (or with no options) : Displays this help"
-"  -sounds | -communications : Select the ""role"" to set"
-"    -sounds : Games, system notifications, Music, movies, narration, and live music recording."
-"    -communications : Voice communications (talking to another person)."
-"  -Input | -Output"
-"    Sets the Input or Output device respectively."
-"  <device name> : The name of the audio device to set as default."
-"    Substring matches are supported, e.g. ""polycom"" will match to the first device with polycom in the name."
-""
-"  Running the executable with just a device name sets the default sound output device."
-"    Example: Set-DefaultAudioDevice ""Realtek"""
+"No device name found",
+" Set-DefaultAudioDevice [-h] [-input|-output] [-sound|-communications] <device_name>",
+"  Sets the Default sound or communications device.",
+"",
+" Syntax:",
+"  -h (or with no options) : Displays this help",
+"  -sounds | -communications : Select the ""role"" to set",
+"    -sounds : Games, system notifications, Music, movies, narration, and live music recording.",
+"    -communications : Voice communications (talking to another person).",
+"  -Input | -Output",
+"    Sets the Input or Output device respectively.",
+"  <device name> : The name of the audio device to set as default.",
+"    Substring matches are supported, e.g. ""polycom"" will match to the first device with polycom in the name.",
+"",
+"  Running the executable with just a device name sets the default sound output device.",
+"    Example: Set-DefaultAudioDevice ""Realtek""",
+"",
+""   
         )
     },
     @{

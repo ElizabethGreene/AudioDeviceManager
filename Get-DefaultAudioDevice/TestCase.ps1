@@ -1,5 +1,4 @@
-# Test Get-AudioDevice.ps1
-$exePath = ".\Get-AudioDevice.exe"
+$exePath = ".\Get-DefaultAudioDevice.exe"
 $baseDir = "C:\github\AudioDeviceManager\x64\Debug"
 $passed = 0
 $total = 0
@@ -55,52 +54,42 @@ function Run-Test {
 # Define test cases
 $tests = @(
     @{
-        Name = "Default (Enabled Output Devices)"
+        Name = "Default"
         Args = @()
-        Expected = @(
-"Echo Cancelling Speakerphone (Sennheiser BTD 800 USB for Lync)",
-"Speakers (Realtek(R) Audio)",
-"NOVATEK (HD Audio Driver for Display Audio)"
+        Expected = @("Speakers (Realtek(R) Audio)"
         )
     },
     @{
         Name = "Help Option (-h)"
         Args = @("-h")
         Expected = @(
-"Get-AudioDevice.exe",
-"  -h: Display Help Message",
-"  -input or -output displays input or output devices respectively. ",
-"  -disabled or -enabled displays disabled or enabled devices respectively.",
-"  Running the executable with no options will display enabled output devices."
-        )
+" Get-DefaultAudioDevice",
+"  Displays the Default audio output device.",
+"   -h : Displays this help",
+"   -sounds | -communications : Select the `"role`" to query",
+"     sounds : Games, system notifications, Music, movies, narration, and live music recording.",
+"     communications : Voice communications (talking to another person).",
+"   -Input | -Output",
+"     Displays the Input or Output device respectively.",
+"  Running the executable with no options displays the default Multimedia output device.",
+""       )
     },
     @{
-        Name = "Input Devices (-input)"
+        Name = "(-input)"
         Args = @("-input")
         Expected = @(
-            "Microphone Array (Intel« Smart Sound Technology for Digital Microphones)",
-            "Echo Cancelling Speakerphone (Sennheiser BTD 800 USB for Lync)"
+            "Microphone Array (Intel« Smart Sound Technology for Digital Microphones)"
         )
     },
     @{
-        Name = "Disabled Devices (-disabled)"
-        Args = @("-disabled")
-        Expected = @()
+        Name = "(-input -communications)"
+        Args = @("-input -communications")
+        Expected = @("Speakers (Realtek(R) Audio)")
     },
     @{
-        Name = "Disabled Input Devices (-disabled -input)"
-        Args = @("-disabled", "-input")
-        Expected = @("Stereo Mix (Realtek(R) Audio)")
-    },
-    @{
-        Name = "Output Devices (-output)"
-        Args = @("-output")
-        Expected = @(
-            "Echo Cancelling Speakerphone (Sennheiser BTD 800 USB for Lync)",
-            "Speakers (Realtek(R) Audio)",
-            "NOVATEK (HD Audio Driver for Display Audio)"
-            
-        )
+        Name = "-output"
+        Args = @("-output -sound")
+        Expected = @("Speakers (Realtek(R) Audio)")
     }
 )
 
