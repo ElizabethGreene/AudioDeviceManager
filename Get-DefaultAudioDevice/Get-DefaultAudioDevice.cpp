@@ -17,10 +17,12 @@
 #include <vector>
 #include "..\Get-AudioDevice\AudioDeviceManger.h"
 #include "mmdeviceapi.h"
+#include "..\version.h"
 
 void PrintHelp() {
 	std::wcout <<
 		L" Get-DefaultAudioDevice" << std::endl <<
+		VER_COPYRIGHT << " v" << VER_PRODUCT_VERSION_STR << std::endl << 
 		L"  Displays the Default audio output device." << std::endl <<
 		L"   -h : Displays this help" << std::endl <<
 		L"   -sounds | -communications : Select the \"role\" to query" << std::endl <<

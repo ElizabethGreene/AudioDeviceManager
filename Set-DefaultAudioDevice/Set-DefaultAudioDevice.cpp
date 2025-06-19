@@ -9,10 +9,12 @@
 #include <locale>
 #include <algorithm>
 #include "..\Get-AudioDevice\AudioDeviceManger.h"
+#include "..\version.h"
 
 void PrintHelp() {
 	std::wcout <<
 		L" Set-DefaultAudioDevice [-h] [-input|-output] [-sound|-communications] <device_name>" << std::endl <<
+		VER_COPYRIGHT << " v" << VER_PRODUCT_VERSION_STR << std::endl <<
 		L"  Sets the Default sound or communications device." << std::endl <<
 		std::endl <<
 		L" Syntax:" << std::endl <<

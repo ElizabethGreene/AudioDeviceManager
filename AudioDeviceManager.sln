@@ -9,6 +9,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{8EC462FD-D22E-90A8-E5CE-7E832BA40C5D}"
 	ProjectSection(SolutionItems) = preProject
 		readme.md = readme.md
+		version.h = version.h
 	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Enable-AudioDevice", "Enable-AudioDevice\Enable-AudioDevice.vcxproj", "{8B1E1792-A26A-427D-8139-9B7C87812995}"

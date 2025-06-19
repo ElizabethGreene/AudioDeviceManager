@@ -3,10 +3,12 @@
 #include <iostream>
 #include <string> 
 #include "..\Get-AudioDevice\AudioDeviceManger.h"
+#include "..\version.h"
 
 void PrintHelp() {
 	std::wcout <<
 		"Enable-AudioDevice" << std::endl <<
+		VER_COPYRIGHT << " v" << VER_PRODUCT_VERSION_STR << std::endl <<
 		"  Enables an audio device." << std::endl << std::endl <<
 		"Syntax:" << std::endl <<
 		"  Enable-AudioDevice <device_name> [-input | -output]" << std::endl <<

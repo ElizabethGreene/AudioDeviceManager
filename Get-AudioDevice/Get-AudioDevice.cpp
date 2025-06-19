@@ -11,10 +11,11 @@
 #include <string>
 #include <vector>
 #include "AudioDeviceManger.h"
-
+#include "..\version.h"
 
 void PrintHelp() {
 	std::wcout << L"Get-AudioDevice.exe" << std::endl;
+	std::wcout << VER_COPYRIGHT << " v" << VER_PRODUCT_VERSION_STR << std::endl;
 	std::wcout << L"  -h: Display Help Message" << std::endl;
 	std::wcout << L"  -input or -output displays input or output devices respectively. " << std::endl;
 	std::wcout << L"  -disabled or -enabled displays disabled or enabled devices respectively." << std::endl;
