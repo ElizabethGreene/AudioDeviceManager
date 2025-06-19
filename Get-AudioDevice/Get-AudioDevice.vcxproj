@@ -132,8 +132,16 @@
     <ClCompile Include="Get-AudioDevice.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\version.h" />
     <ClInclude Include="AudioDeviceManger.h" />
     <ClInclude Include="PolicyConfig.h" />
+    <ClInclude Include="resource.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="TestCase.ps1" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="Get-AudioDevice.rc" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

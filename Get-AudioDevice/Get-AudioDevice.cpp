@@ -11,15 +11,11 @@
 #include <string>
 #include <vector>
 #include "AudioDeviceManger.h"
-
-
-enum class Actions {
-	SHOWDATA,
-	SHOWHELP
-};
+#include "..\version.h"
 
 void PrintHelp() {
 	std::wcout << L"Get-AudioDevice.exe" << std::endl;
+	std::wcout << VER_COPYRIGHT << " v" << VER_PRODUCT_VERSION_STR << std::endl;
 	std::wcout << L"  -h: Display Help Message" << std::endl;
 	std::wcout << L"  -input or -output displays input or output devices respectively. " << std::endl;
 	std::wcout << L"  -disabled or -enabled displays disabled or enabled devices respectively." << std::endl;
@@ -38,27 +34,6 @@ DeviceStatuses DeviceStatusFromCommandLine(int argc, wchar_t* argv[]) {
 	return DeviceStatuses::Enabled;
 };
 
-Actions ActionFromCommandLine(int argc, wchar_t* argv[]) {
-	if (argc > 1) {
-		for (int i = 1; i < argc; ++i) {
-			if (_wcsicmp(argv[i], L"-h") == 0) {
-				return Actions::SHOWHELP;
-			}
-		}
-	}
-	return Actions::SHOWDATA;
-};
-
-DeviceTypes DeviceTypeFromCommandLine(int argc, wchar_t* argv[]) {
-	if (argc > 1) {
-		for (int i = 1; i < argc; ++i) {
-			if (_wcsicmp(argv[i], L"-input") == 0) {
-				return DeviceTypes::Input;
-			}
-		}
-	}
-	return DeviceTypes::Output;
-};
 
 int wmain(int argc, wchar_t* argv[])
 {
@@ -78,7 +53,7 @@ int wmain(int argc, wchar_t* argv[])
 
 	if (FAILED(hr))
 	{
-		std::cerr << "Failed to get device names: " << std::hex << hr << std::endl;
+		std::wcerr << L"Failed to get device names: " << std::hex << hr << std::endl;
 		return -1;
 	}
 

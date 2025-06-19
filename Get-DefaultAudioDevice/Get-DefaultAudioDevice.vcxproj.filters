@@ -15,15 +15,12 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Set-DefaultAudioDevice.cpp">
+    <ClCompile Include="Get-DefaultAudioDevice.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\Get-AudioDevice\AudioDeviceManger.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Get-AudioDevice\PolicyConfig.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="resource.h">
@@ -37,7 +34,7 @@
     <None Include="TestCase.ps1" />
   </ItemGroup>
   <ItemGroup>
-    <ResourceCompile Include="Set-DefaultAudioDevice.rc">
+    <ResourceCompile Include="Get-DefaultAudioDevice.rc">
       <Filter>Resource Files</Filter>
     </ResourceCompile>
   </ItemGroup>
