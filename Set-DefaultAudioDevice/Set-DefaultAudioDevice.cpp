@@ -58,9 +58,9 @@ int wmain(int argc, wchar_t* argv[]) // Add parameters to main function
 	// Display help message if no device name is found.
 	if (targetDeviceName.empty())
 	{
-		std::wcout << L"No device name found" << std::endl;
+		std::wcerr << L"No device name found" << std::endl;
 		PrintHelp();
-		return 0;
+		return -1;
 	}
 
 	// There is a non-intuitive behavior here.  The setDefault function doesn't take input or output as an argument. 
@@ -70,7 +70,7 @@ int wmain(int argc, wchar_t* argv[]) // Add parameters to main function
 	targetDeviceName = getDeviceNameFromPartialName(targetDeviceName, DeviceStatuses::Enabled, deviceType);
 	if (targetDeviceName.empty())
 	{
-		std::wcout << L"Failed to find a matching device." << std::endl;
+		std::wcerr << L"Failed to find a matching device." << std::endl;
 		return -1;
 	}
 
@@ -78,7 +78,7 @@ int wmain(int argc, wchar_t* argv[]) // Add parameters to main function
 	LPCWSTR deviceId = getDeviceIdFromName(targetDeviceName, DeviceStatuses::Enabled, deviceType);
 	if (deviceId == NULL)
 	{
-		std::wcout << L"Failed to find a matching device: " << targetDeviceName << std::endl;
+		std::wcerr << L"Failed to find a matching device: " << targetDeviceName << std::endl;
 		return -1;
 	}
 
@@ -86,7 +86,7 @@ int wmain(int argc, wchar_t* argv[]) // Add parameters to main function
 	HRESULT hr = SetDefaultAudioDevice(deviceId, eRole);
 	if (FAILED(hr))
 	{
-		std::cerr << "Failed to set default device: " << std::hex << hr << std::endl;
+		std::wcerr << L"Failed to set default device: " << std::hex << hr << std::endl;
 		return -1;
 	}
 	std::wcout << L"Default audio device set to: " << targetDeviceName << std::endl;

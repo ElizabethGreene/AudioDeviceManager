@@ -42,9 +42,9 @@ int wmain(int argc, wchar_t* argv[])
 	// Display help message if no device name is found.
 	if (targetDeviceName.empty())
 	{
-		std::wcout << L"No device name found" << std::endl;
+		std::wcerr << L"No device name found" << std::endl;
 		PrintHelp();
-		return 0;
+		return -1;
 	}
 
 	// Get the Device ID based on the device name
@@ -55,7 +55,7 @@ int wmain(int argc, wchar_t* argv[])
 		newTargetDeviceName = getDeviceNameFromPartialName(targetDeviceName, DeviceStatuses::Enabled, deviceType);
 		if (newTargetDeviceName.empty())
 		{
-			std::wcout << L"Failed to find a matching device." << std::endl;
+			std::wcerr << L"Failed to find a matching device." << std::endl;
 			return -1;
 		}
 		else {
@@ -67,13 +67,13 @@ int wmain(int argc, wchar_t* argv[])
 	LPCWSTR deviceId = getDeviceIdFromName(newTargetDeviceName, DeviceStatuses::Disabled, deviceType);
 	if (deviceId == NULL)
 	{
-		std::wcout << L"Failed to find a matching device: " << newTargetDeviceName << std::endl;
+		std::wcerr << L"Failed to find a matching device: " << newTargetDeviceName << std::endl;
 		return -1;
 	}
 
 	HRESULT hr = SetAudioDeviceStatus(deviceId, DeviceStatuses::Enabled);
 	if (hr != 0) {
-		std::wcout << L"Failed to enable audio device: " << newTargetDeviceName << std::hex << hr << std::endl;
+		std::wcerr << L"Failed to enable audio device: " << newTargetDeviceName << std::hex << hr << std::endl;
 		return -1;
 	}
 	std::wcout << L"Audio device enabled: " << newTargetDeviceName << std::endl;

@@ -52,7 +52,7 @@ int wmain(int argc, wchar_t* argv[])
 
 	if (FAILED(hr))
 	{
-		std::cerr << "Failed to get device names: " << std::hex << hr << std::endl;
+		std::wcerr << L"Failed to get device names: " << std::hex << hr << std::endl;
 		return -1;
 	}
 

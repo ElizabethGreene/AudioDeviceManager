@@ -50,7 +50,7 @@ int wmain(int argc, wchar_t* argv[])
 
 	if (FAILED(hr))
 	{
-		std::cerr << "Failed to get default audio device information: " << std::hex << hr << std::endl;
+		std::wcerr << L"Failed to get default audio device information: " << std::hex << hr << std::endl;
 		return -1;
 	}
 
