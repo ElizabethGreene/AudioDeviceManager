@@ -13,7 +13,7 @@ void PrintHelp() {
 		"Syntax:" << std::endl <<
 		"  Disable-AudioDevice <device_name> [-input | -output]" << std::endl <<
 		"    Calling with no options displays this help message." << std::endl <<
-		"    -input | -output : Select to enable an input or output device." << std::endl <<
+		"    -input | -output : Select to disable an input or output device." << std::endl <<
 		"    if -input or -output is not specified, the default is to disable an output device." << std::endl <<
 		"    <device_name> : The name of the audio device to disable." << std::endl <<
 		"  Example: Disable-AudioDevice \"Realtek High Definition Audio)\" will disable that output device." << std::endl <<

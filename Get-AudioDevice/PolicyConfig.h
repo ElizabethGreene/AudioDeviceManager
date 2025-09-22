@@ -75,15 +75,19 @@ public:
     );
 
     virtual HRESULT STDMETHODCALLTYPE GetPropertyValue(
-        PCWSTR,
-        const PROPERTYKEY &,
-        PROPVARIANT *
+        //PCWSTR,
+        //const PROPERTYKEY &,
+        //PROPVARIANT *
+        //Changed per  https://learn.microsoft.com/en-us/answers/questions/669471/how-to-control-enable-audio-enhancements-with-code
+        PCWSTR pszDeviceName, BOOL bFxStore, const PROPERTYKEY& pKey, PROPVARIANT* pv
     );
 
     virtual HRESULT STDMETHODCALLTYPE SetPropertyValue(
-        PCWSTR,
-        const PROPERTYKEY &,
-        PROPVARIANT *
+        //PCWSTR,
+        //const PROPERTYKEY &,
+        //PROPVARIANT *
+        //Changed per  https://learn.microsoft.com/en-us/answers/questions/669471/how-to-control-enable-audio-enhancements-with-code
+        PCWSTR pszDeviceName, BOOL bFxStore, const PROPERTYKEY& pKey, PROPVARIANT* pv
     );
 
     virtual HRESULT STDMETHODCALLTYPE SetDefaultEndpoint(
@@ -157,15 +161,19 @@ public:
     );  // not available on Windows 7, use method from IPolicyConfig
 
     virtual HRESULT STDMETHODCALLTYPE GetPropertyValue(
-        PCWSTR,
-        const PROPERTYKEY &,
-        PROPVARIANT *
+        //PCWSTR,
+        //const PROPERTYKEY &,
+        //PROPVARIANT *
+        //Changed per  https://learn.microsoft.com/en-us/answers/questions/669471/how-to-control-enable-audio-enhancements-with-code
+        PCWSTR pszDeviceName, BOOL bFxStore, const PROPERTYKEY& pKey, PROPVARIANT* pv
     );
 
     virtual HRESULT STDMETHODCALLTYPE SetPropertyValue(
-        PCWSTR,
-        const PROPERTYKEY &,
-        PROPVARIANT *
+        //PCWSTR,
+        //const PROPERTYKEY &,
+        //PROPVARIANT *
+        //Changed per  https://learn.microsoft.com/en-us/answers/questions/669471/how-to-control-enable-audio-enhancements-with-code
+        PCWSTR pszDeviceName, BOOL bFxStore, const PROPERTYKEY& pKey, PROPVARIANT* pv
     );
 
     virtual HRESULT STDMETHODCALLTYPE SetDefaultEndpoint(

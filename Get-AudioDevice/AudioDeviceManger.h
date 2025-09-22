@@ -1,6 +1,7 @@
 #pragma once
 
 #include <iostream>
+#include <initguid.h>
 #include <mmdeviceapi.h>
 #include <endpointvolume.h>
 #include <comdef.h>
@@ -27,6 +28,11 @@ enum class DeviceStatuses {
 enum class Actions {
 	SHOWDATA,
 	SHOWHELP
+};
+
+enum class DeviceSysFXStatuses {
+	Disabled,
+	Enabled
 };
 
 Actions ActionFromCommandLine(int argc, wchar_t* argv[]) {
@@ -507,3 +513,52 @@ HRESULT SetDefaultAudioDevice(LPCWSTR devID,ERole eRole)
 //	deviceEnumerator->Release();
 //	return S_OK;
 //}
+
+
+HRESULT SetAudioDeviceSysFXStatus(std::wstring targetDeviceId, DeviceSysFXStatuses sysFXStatus) {
+
+	// Ref: https://learn.microsoft.com/en-us/answers/questions/669471/how-to-control-enable-audio-enhancements-with-code
+	// 
+	
+	IMMDeviceEnumerator* pDeviceEnumerator;
+	HRESULT hr = CoCreateInstance(__uuidof(MMDeviceEnumerator), NULL, CLSCTX_ALL, __uuidof(IMMDeviceEnumerator), (LPVOID*)&pDeviceEnumerator);
+	if (SUCCEEDED(hr))
+	{
+		IMMDevice* pDevice;
+		hr = pDeviceEnumerator->GetDevice(targetDeviceId.c_str(), &pDevice);
+		if (SUCCEEDED(hr))
+		{
+			LPWSTR pwstrEndpointId = NULL;
+			hr = pDevice->GetId(&pwstrEndpointId);
+
+			IPolicyConfig* pPolicyConfig;
+			//hr = CoCreateInstance(__uuidof(CPolicyConfigClient), NULL, CLSCTX_INPROC_SERVER, __uuidof(IPolicyConfig), (LPVOID*)&pPolicyConfig);
+  			hr = CoCreateInstance(__uuidof(CPolicyConfigClient), NULL, CLSCTX_INPROC_SERVER, IID_PPV_ARGS(&pPolicyConfig));
+
+			if (SUCCEEDED(hr))
+			{
+				PROPVARIANT var;
+				PropVariantInit(&var);
+				hr = pPolicyConfig->GetPropertyValue(pwstrEndpointId, TRUE, PKEY_AudioEndpoint_Disable_SysFx, &var);
+				if (FAILED(hr))
+				{
+					std::cerr << "Failed to get AudioDeviceSysFXStatus: " << std::hex << hr << std::endl;
+					return hr;
+				}
+				if (sysFXStatus == DeviceSysFXStatuses::Enabled)
+					var.uiVal = (USHORT)0;
+				else
+					var.uiVal = (USHORT)1;
+				hr = pPolicyConfig->SetPropertyValue(pwstrEndpointId, TRUE,	PKEY_AudioEndpoint_Disable_SysFx, &var);
+				if (FAILED(hr))
+				{
+					std::cerr << "Failed to set AudioDeviceSysFXStatus: " << std::hex << hr << std::endl;
+					return hr;
+				}
+				pPolicyConfig->Release();
+			}
+		}
+		pDeviceEnumerator->Release();
+	}
+	return hr;
+}
