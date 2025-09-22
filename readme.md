@@ -1,4 +1,4 @@
-# AudioDeviceManager 
+# AudioDeviceManager
 
 This is a collection of command-line utilities for managing Audio Devices in Windows, to automate the functions provided by the Sound Control panel, mmsys.cpl..  They can list devices, set the default devices, and enable/disable devices.
 
@@ -11,6 +11,7 @@ With this:
 ![Screenshot](doc/screenshot.png)
 
 ## Utilities
+
 ```
 Get-AudioDevice.exe
   List audio devices on the system.
@@ -28,7 +29,6 @@ Get-DefaultAudioDevice
    -Input | -Output
      Displays the Input or Output device respectively.
   Running the executable with no options displays the default Multimedia output device.
-
 
 Set-DefaultAudioDevice.exe
  Set-DefaultAudioDevice [-h] [-input|-output] [-sound|-communications] device_name
@@ -70,6 +70,36 @@ Syntax:
   Example: Disable-AudioDevice "Realtek High Definition Audio)" will disable that output device.
   Substring matches are supported, e.g. Disable-AudioDevice "polycom" -input will disable the first input device containing polycom in the name.
 
+```
+
+Enable-AudioDeviceSysFX - Enables "Audio Enhancements" for a sound device
+
+![Screenshot](doc/sysfx.png)
+
+```
+Syntax:
+  Enable-AudioDeviceSysFX device_name [-input | -output]
+    Calling with no options displays this help message.
+    -input | -output : Select to enable an input or output device audio enhancements.
+    if -input or -output is not specified, the default is to enable an output device audio enhancements.
+    device_name : The name of the audio device audio enhancements to enable.
+  Example: Enable-AudioDeviceSysFX "Realtek High Definition Audio)" will enable the audio enhancements on that output device.
+  Substring matches are supported, e.g. Enable-AudioDeviceSysFX "polycom" -input will enable the audio enhancements on the first input device containing polycom in the name.
+```
+
+Disable-AudioDeviceSysFX - Disables "audio enhancements" for a sound device
+
+![Screenshot](doc/sysfx.png)
+
+```
+Syntax:
+  Disable-AudioDeviceSysFX <device_name> [-input | -output]
+    Calling with no options displays this help message.
+    -input | -output : Select to disable an input or output device audio enhancements.
+    if -input or -output is not specified, the default is to disable an output device audio enhancements.
+    <device_name> : The name of the audio device audio enhancements to disable.
+  Example: Disable-AudioDeviceSysFX "Realtek High Definition Audio)" will disable the audio enhancements on that output device.
+  Substring matches are supported, e.g. Disable-AudioDeviceSysFX "polycom" -input will disable the audio enhancements on the first input device containing polycom in the name.
 ```
 
 ## Disclaimer
